@@ -2,7 +2,7 @@
 import 'package:demo_todo_list/common/widgets/appbar.dart';
 import 'package:demo_todo_list/common/widgets/createnewtask_dialog.dart';
 import 'package:demo_todo_list/common/widgets/todo_tile.dart';
-import 'package:demo_todo_list/util/constants/todotasks.dart';
+import 'package:demo_todo_list/util/models/todotasks.dart';
 import 'package:flutter/material.dart';
 
 
@@ -60,6 +60,8 @@ void createNewTask () {
                     starred: Todotasks.toDoTasks[index][2],
                     taskCompleted: Todotasks.toDoTasks[index][4],
                     taskIcon: Todotasks.toDoTasks[index][3],
+                    routine: Todotasks.toDoTasks[index][5],
+                    deadline: Todotasks.toDoTasks[index][6],
                     starChanged: (value, index) {
                       
         setState(() {

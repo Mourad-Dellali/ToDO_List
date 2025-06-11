@@ -1,5 +1,6 @@
 import 'package:demo_todo_list/util/constants/available_icons.dart';
 import 'package:demo_todo_list/util/constants/sizes.dart';
+import 'package:demo_todo_list/util/models/is_routine.dart';
 import 'package:flutter/material.dart';
 
 
@@ -11,9 +12,13 @@ final bool starred;
 final bool taskCompleted;
 final Icon? taskIcon;
 final int index;
+final IsRoutine routine;
+final DateTime? deadline;
 final Function(bool,int) starChanged;
   const TodoTile({super.key,
   required this.taskTitle,
+  required this.routine,
+  this.deadline,
   this.starred=false,
   required this.index,
   this.taskCompleted=false,
@@ -31,30 +36,52 @@ final Function(bool,int) starChanged;
     borderRadius: BorderRadius.circular(TSizes.cardRadiusMd),
   ),
 child: 
-Padding(
-  padding: const EdgeInsets.all(20.0),
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Row(
-        spacing: 20,
-        children: [
 
-        
-    displayIcon,
-    Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+Padding(
+  padding: const EdgeInsets.all(16.0),
+  child: Column(
+    spacing: 20,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
       
+     
+      
+         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              spacing: 20,
+              children: [
+      
+              
+          displayIcon,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            
+            children: [
+              Text(taskTitle),
+              Text(taskDesc)
+            ],
+          )]),
+          IconButton(onPressed:() => starChanged(!starred,index), icon: starred ? Icon(Icons.star) :Icon(Icons.star_border) ,
+          color: starred ? Colors.yellow : Colors.grey )
+          //Checkbox(value: starred, onChanged: onChanged)
+        ,
+        ],
+        ),
+        
+  
+    Row(
       children: [
-        Text(taskTitle),
-        Text(taskDesc)
+        routine.isRoutine ? Icon(Icons.repeat) : Icon(Icons.event),
+        Text("02.02.2022"),
+        
       ],
-    )]),
-    IconButton(onPressed:() => starChanged(!starred,index), icon: starred ? Icon(Icons.star) :Icon(Icons.star_border) ,
-    color: starred ? Colors.yellow : Colors.grey )
-    //Checkbox(value: starred, onChanged: onChanged)
-  ],),
+    )
+    ],
+  ),
 ),
+
   
         );
   }
