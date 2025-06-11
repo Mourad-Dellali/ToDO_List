@@ -16,12 +16,7 @@ class ToDo extends StatefulWidget {
 
 class _ToDoState extends State<ToDo> {
   
-void checkboxChanged (bool? value, int index) {
-setState(() {
-  Todotasks.toDoTasks[index][2]=!Todotasks.toDoTasks[index][2];
-});
 
-}
 void createNewTask () {
   showModalBottomSheet(context: context,
   // isScrollControlled: true,
@@ -59,11 +54,18 @@ void createNewTask () {
                 itemCount: Todotasks.toDoTasks.length,
                 itemBuilder: (context,index){
                   return TodoTile(
+                    index: index,
                     taskTitle: Todotasks.toDoTasks[index][0],
                     taskDesc: Todotasks.toDoTasks[index][1],
-                    taskCompleted: Todotasks.toDoTasks[index][2],
+                    starred: Todotasks.toDoTasks[index][2],
+                    taskCompleted: Todotasks.toDoTasks[index][4],
                     taskIcon: Todotasks.toDoTasks[index][3],
-                    onChanged:(value) => checkboxChanged(value,index),
+                    starChanged: (value, index) {
+                      
+        setState(() {
+          Todotasks.toDoTasks[index][2] = value;
+        }); 
+      },
                   );
                 },
               

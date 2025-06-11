@@ -7,14 +7,17 @@ import 'package:flutter/material.dart';
 class TodoTile extends StatelessWidget {
 final String taskTitle;
 final String taskDesc;
+final bool starred;
 final bool taskCompleted;
 final Icon? taskIcon;
-
-final Function(bool?)? onChanged;
+final int index;
+final Function(bool,int) starChanged;
   const TodoTile({super.key,
   required this.taskTitle,
-  required this.taskCompleted,
-  required this.onChanged,
+  this.starred=false,
+  required this.index,
+  this.taskCompleted=false,
+  required this.starChanged,
   this.taskDesc="",
   this.taskIcon,});
 
@@ -29,20 +32,27 @@ final Function(bool?)? onChanged;
   ),
 child: 
 Padding(
-  padding: const EdgeInsets.all(8.0),
+  padding: const EdgeInsets.all(20.0),
   child: Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
+      Row(
+        spacing: 20,
+        children: [
+
+        
     displayIcon,
     Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      
       children: [
         Text(taskTitle),
         Text(taskDesc)
       ],
-    ),
-    
-    Checkbox(value: taskCompleted, onChanged: onChanged)
+    )]),
+    IconButton(onPressed:() => starChanged(!starred,index), icon: starred ? Icon(Icons.star) :Icon(Icons.star_border) ,
+    color: starred ? Colors.yellow : Colors.grey )
+    //Checkbox(value: starred, onChanged: onChanged)
   ],),
 ),
   
