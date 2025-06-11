@@ -2,6 +2,7 @@
 import 'package:demo_todo_list/common/widgets/appbar.dart';
 import 'package:demo_todo_list/common/widgets/createnewtask_dialog.dart';
 import 'package:demo_todo_list/common/widgets/todo_tile.dart';
+import 'package:demo_todo_list/util/constants/todotasks.dart';
 import 'package:flutter/material.dart';
 
 
@@ -14,14 +15,10 @@ class ToDo extends StatefulWidget {
 }
 
 class _ToDoState extends State<ToDo> {
-  List toDoTasks= [
-    ["Note 1: ","" ,false],
-    ["Note 2: ","" ,false] ,
-    ["Note 3: ","", true]// default notes
-  ];
+  
 void checkboxChanged (bool? value, int index) {
 setState(() {
-  toDoTasks[index][2]=!toDoTasks[index][2];
+  Todotasks.toDoTasks[index][2]=!Todotasks.toDoTasks[index][2];
 });
 
 }
@@ -59,12 +56,13 @@ void createNewTask () {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: toDoTasks.length,
+                itemCount: Todotasks.toDoTasks.length,
                 itemBuilder: (context,index){
                   return TodoTile(
-                    taskTitle: toDoTasks[index][0],
-                    taskDesc: toDoTasks[index][1],
-                    taskCompleted: toDoTasks[index][2],
+                    taskTitle: Todotasks.toDoTasks[index][0],
+                    taskDesc: Todotasks.toDoTasks[index][1],
+                    taskCompleted: Todotasks.toDoTasks[index][2],
+                    taskIcon: Todotasks.toDoTasks[index][3],
                     onChanged:(value) => checkboxChanged(value,index),
                   );
                 },

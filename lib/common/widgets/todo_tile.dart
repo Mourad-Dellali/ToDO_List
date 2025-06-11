@@ -1,7 +1,7 @@
 import 'package:demo_todo_list/util/constants/available_icons.dart';
 import 'package:demo_todo_list/util/constants/sizes.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
+
 
 
 class TodoTile extends StatelessWidget {
@@ -16,17 +16,13 @@ final Function(bool?)? onChanged;
   required this.taskCompleted,
   required this.onChanged,
   this.taskDesc="",
-  this.taskIcon});
+  this.taskIcon,});
 
 
   @override
   Widget build(BuildContext context) {
-    final random = Random();
-int min = 0;
-int max = AvailableIcons.availableIcons.length;
-int randomInt = min + random.nextInt(max - min);
+    final Icon displayIcon = taskIcon ?? Icon(AvailableIcons.availableIcons[0]);
     return Card(
-      
       elevation: TSizes.cardElevation,
       shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(TSizes.cardRadiusMd),
@@ -37,8 +33,9 @@ Padding(
   child: Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-    taskIcon ?? Icon(AvailableIcons.availableIcons[randomInt]),
+    displayIcon,
     Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(taskTitle),
         Text(taskDesc)
