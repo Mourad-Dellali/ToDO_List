@@ -1,6 +1,7 @@
 
 import 'package:demo_todo_list/common/widgets/appbar.dart';
 import 'package:demo_todo_list/common/widgets/createnewtask_dialog.dart';
+import 'package:demo_todo_list/common/widgets/showtask_modal.dart';
 import 'package:demo_todo_list/common/widgets/todo_tile.dart';
 import 'package:demo_todo_list/util/models/todotasks.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,11 @@ void createNewTask () {
   showModalBottomSheet(context: context,
   // isScrollControlled: true,
    builder:(context) => CreatenewtaskDialog(),);
+}
+void showTask(int index) {
+  showModalBottomSheet(context: context,
+  // isScrollControlled: true,
+   builder:(context) => ShowTaskModal(index: index,),);
 }
 
   @override
@@ -62,6 +68,8 @@ void createNewTask () {
                     taskIcon: Todotasks.toDoTasks[index][3],
                     routine: Todotasks.toDoTasks[index][5],
                     deadline: Todotasks.toDoTasks[index][6],
+                    onTap:() => 
+                    showTask(index),
                     starChanged: (value, index) {
                       
         setState(() {

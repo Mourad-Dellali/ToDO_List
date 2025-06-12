@@ -15,9 +15,11 @@ final int index;
 final IsRoutine routine;
 final DateTime? deadline;
 final Function(bool,int) starChanged;
+final VoidCallback? onTap;
   const TodoTile({super.key,
   required this.taskTitle,
   required this.routine,
+  this.onTap,
   this.deadline,
   this.starred=false,
   required this.index,
@@ -31,54 +33,66 @@ final Function(bool,int) starChanged;
   Widget build(BuildContext context) {
     final Icon displayIcon = taskIcon ?? Icon(AvailableIcons.availableIcons[0]);
     return Card(
+
       elevation: TSizes.cardElevation,
       shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(TSizes.cardRadiusMd),
   ),
 child: 
 
-Padding(
-  padding: const EdgeInsets.all(16.0),
-  child: Column(
-    spacing: 20,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      
-     
-      
-         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              spacing: 20,
-              children: [
-      
-              
-          displayIcon,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            
-            children: [
-              Text(taskTitle),
-              Text(taskDesc)
-            ],
-          )]),
-          IconButton(onPressed:() => starChanged(!starred,index), icon: starred ? Icon(Icons.star) :Icon(Icons.star_border) ,
-          color: starred ? Colors.yellow : Colors.grey )
-          //Checkbox(value: starred, onChanged: onChanged)
-        ,
-        ],
-        ),
-        
-  
-    Row(
+InkWell(
+  onTap: onTap,
+  child: Padding(
+    padding: const EdgeInsets.all(16.0),
+    child: Column(
+      spacing: 20,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        routine.isRoutine ? Icon(Icons.repeat) : Icon(Icons.event),
-        Text("02.02.2022"),
         
+       
+        
+           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                spacing: 20,
+                children: [
+        
+                
+            displayIcon,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              
+              children: [
+                Text(taskTitle),
+                Text(taskDesc)
+              ],
+            )]),
+            IconButton(onPressed:() => starChanged(!starred,index), icon: starred ? Icon(Icons.star) :Icon(Icons.star_border) ,
+            color: starred ? Colors.yellow : Colors.grey )
+            //Checkbox(value: starred, onChanged: onChanged)
+          ,
+          ],
+          ),
+          
+    
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            spacing: 10,
+            children: [
+          routine.isRoutine ? Icon(Icons.repeat) : Icon(Icons.event),
+          Text("02.02.2022"), // will make dynamic later
+            ]
+          ),
+          Text("Work") // will make dynamic later
+          
+          
+        ],
+      )
       ],
-    )
-    ],
+    ),
   ),
 ),
 
