@@ -33,9 +33,13 @@ final _descriptionTextController=TextEditingController();
       //color: Colors.blue,
      
       child:Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        
         children: [
           
           Row(
+            
 children: [
 IconButton(
   icon:Icon(_selectedIcon,),

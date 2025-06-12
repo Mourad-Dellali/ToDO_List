@@ -1,3 +1,6 @@
+import 'package:demo_todo_list/common/widgets/icon_selector.dart';
+import 'package:demo_todo_list/common/widgets/routine_dropdown.dart';
+import 'package:demo_todo_list/common/widgets/textfield.dart';
 import 'package:demo_todo_list/util/models/todotasks.dart';
 import 'package:flutter/material.dart';
 
@@ -13,10 +16,32 @@ class ShowTaskModal extends StatefulWidget {
 }
 
 class _ShowTaskModalState extends State<ShowTaskModal> {
+  late IconData _selectedIcon;
+late TextEditingController _titleTextController;
+late TextEditingController _descriptionTextController;
+  @override
+  void initState() {
+    super.initState();
+    _titleTextController= TextEditingController(text:Todotasks.toDoTasks[widget.index][0] );
+    _descriptionTextController=TextEditingController(text: Todotasks.toDoTasks[widget.index][1]);
+    _selectedIcon = Todotasks.toDoTasks[widget.index][3];
+  }
+  void showIconPicker(BuildContext context, Function(IconData) onIconSelected) {
+  showModalBottomSheet(context: context, builder:(context) =>
+   IconSelector(
+    onIconSelected: (icon) {
+      Navigator.of(context).pop();
+      onIconSelected(icon);
+    }
+    
+    ),
+  );
+}
   @override
   Widget build(BuildContext context) {
+    
    return Container(
-    IconData _selectedIcon=Todotasks.toDoTasks[index][3];
+    
       padding: EdgeInsets.all(4),
       //color: Colors.blue,
      
@@ -50,4 +75,5 @@ RoutineDropdown(),
       )
     );
   }
+  
 }

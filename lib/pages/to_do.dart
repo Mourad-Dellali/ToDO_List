@@ -21,6 +21,7 @@ class _ToDoState extends State<ToDo> {
 void createNewTask () {
   showModalBottomSheet(context: context,
   // isScrollControlled: true,
+  
    builder:(context) => CreatenewtaskDialog(),);
 }
 void showTask(int index) {
@@ -65,7 +66,7 @@ void showTask(int index) {
                     taskDesc: Todotasks.toDoTasks[index][1],
                     starred: Todotasks.toDoTasks[index][2],
                     taskCompleted: Todotasks.toDoTasks[index][4],
-                    taskIcon: Todotasks.toDoTasks[index][3],
+                    taskIcon: Icon(Todotasks.toDoTasks[index][3]),
                     routine: Todotasks.toDoTasks[index][5],
                     deadline: Todotasks.toDoTasks[index][6],
                     onTap:() => 

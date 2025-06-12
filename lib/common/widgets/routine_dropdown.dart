@@ -14,7 +14,7 @@ class _RoutineDropdownState extends State<RoutineDropdown> {
   Widget build(BuildContext context) {
     return DropdownButton(
       value: dropDownValue,
-      icon: Icon(Icons.arrow_downward),
+      icon: Icon(Icons.arrow_drop_down),
 
        onChanged: (String? newValue) {
         setState(() {
