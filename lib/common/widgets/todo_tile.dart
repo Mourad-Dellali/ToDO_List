@@ -1,5 +1,6 @@
 import 'package:demo_todo_list/util/constants/available_icons.dart';
 import 'package:demo_todo_list/util/constants/sizes.dart';
+import 'package:demo_todo_list/util/models/is_deadline.dart';
 import 'package:demo_todo_list/util/models/is_routine.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ final bool taskCompleted;
 final Icon? taskIcon;
 final int index;
 final IsRoutine routine;
-final DateTime? deadline;
+final IsDeadline? deadline;
 final Function(bool,int) starChanged;
 final VoidCallback? onTap;
   const TodoTile({super.key,
@@ -85,10 +86,14 @@ InkWell(
             spacing: 10,
             children: [
           routine.isRoutine ? Icon(Icons.repeat) : Icon(Icons.event),
-          Text("02.02.2022"), // will make dynamic later
+          routine.isRoutine
+      ? Text(routine.routineType ?? "")
+      : (deadline?.deadline != null
+          ? Text(deadline!.deadline.toString())
+          : const Text("")),
             ]
           ),
-          Text(taskCategory) // will make dynamic later
+          Text(taskCategory) 
           
           
         ],

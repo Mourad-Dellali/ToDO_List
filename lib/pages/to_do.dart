@@ -68,7 +68,7 @@ void showTask(int index) {
                     taskCompleted: Todotasks.toDoTasks[index][4],
                     taskIcon: Icon(Todotasks.toDoTasks[index][3]),
                     routine: Todotasks.toDoTasks[index][5],
-                    deadline: Todotasks.toDoTasks[index][6].deadline,
+                    deadline: Todotasks.toDoTasks[index][6],
                     taskCategory: Todotasks.toDoTasks[index][7],
                     onTap:() => 
                     showTask(index),
