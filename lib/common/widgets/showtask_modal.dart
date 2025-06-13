@@ -72,7 +72,7 @@ TTextfield(textController: _titleTextController, textTitle: "Title")
           ),
           TTextfield(textController: _descriptionTextController, textTitle: "Description",maxLines: 5,),
 RoutineDropdown(currentRoutine:  Todotasks.toDoTasks[widget.index][5].routineType,deadline:Todotasks.toDoTasks[widget.index][6].deadline ,timeOfDay: Todotasks.toDoTasks[widget.index][5].time,weekday:Todotasks.toDoTasks[widget.index][5].daysOfWeek ,dayofmonth:Todotasks.toDoTasks[widget.index][5].dayOfMonth ,),
-TaskCategory(),
+TaskCategory(taskCategory: Todotasks.toDoTasks[widget.index][7]),
 Spacer()
           
         ],

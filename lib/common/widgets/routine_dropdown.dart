@@ -2,13 +2,14 @@ import 'package:demo_todo_list/common/widgets/task_deadline.dart';
 import 'package:flutter/material.dart';
 
 class RoutineDropdown extends StatefulWidget {
-  
+  final bool? isRoutine;
   final String? currentRoutine;
   final TimeOfDay? timeOfDay;
   final String? weekday;
   final DateTime? deadline;
   final int? dayofmonth;
   const RoutineDropdown({super.key,
+  required this.isRoutine,
   required this.currentRoutine,
   this.deadline,
   this.timeOfDay,
@@ -119,6 +120,7 @@ class _RoutineDropdownState extends State<RoutineDropdown> {
                 .toList(),
           ),
         if (dropDownValue == "Monthly")
+        
           Row(
             children: [
               ElevatedButton(

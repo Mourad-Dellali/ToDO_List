@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TaskCategory extends StatefulWidget {
-  const TaskCategory({super.key});
+  final String? taskCategory;
+  const TaskCategory({super.key,
+  this.taskCategory});
 
   @override
   State<TaskCategory> createState() => _TaskCategoryState();
@@ -20,7 +22,11 @@ class _TaskCategoryState extends State<TaskCategory> {
   ];
 
   String? category; // Variable to store the selected category
-
+@override
+void initState() {
+  super.initState();
+  category=widget.taskCategory;
+}
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
