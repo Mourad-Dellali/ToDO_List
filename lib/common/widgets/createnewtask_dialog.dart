@@ -1,5 +1,6 @@
 import 'package:demo_todo_list/common/widgets/icon_selector.dart';
 import 'package:demo_todo_list/common/widgets/routine_dropdown.dart';
+import 'package:demo_todo_list/common/widgets/task_category.dart';
 import 'package:demo_todo_list/common/widgets/textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -60,7 +61,9 @@ TTextfield(textController: _titleTextController, textTitle: "Title")
 ],
           ),
           TTextfield(textController: _descriptionTextController, textTitle: "Description",maxLines: 5,),
-RoutineDropdown(),
+RoutineDropdown(currentRoutine: "One Time",),
+TaskCategory(),
+Spacer()
           
         ],
       )

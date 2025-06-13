@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 class TodoTile extends StatelessWidget {
 final String taskTitle;
 final String taskDesc;
+final String taskCategory;
 final bool starred;
 final bool taskCompleted;
 final Icon? taskIcon;
@@ -17,6 +18,7 @@ final DateTime? deadline;
 final Function(bool,int) starChanged;
 final VoidCallback? onTap;
   const TodoTile({super.key,
+  this.taskCategory="Chore",
   required this.taskTitle,
   required this.routine,
   this.onTap,
@@ -86,7 +88,7 @@ InkWell(
           Text("02.02.2022"), // will make dynamic later
             ]
           ),
-          Text("Work") // will make dynamic later
+          Text(taskCategory) // will make dynamic later
           
           
         ],

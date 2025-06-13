@@ -1,5 +1,6 @@
 import 'package:demo_todo_list/common/widgets/icon_selector.dart';
 import 'package:demo_todo_list/common/widgets/routine_dropdown.dart';
+import 'package:demo_todo_list/common/widgets/task_category.dart';
 import 'package:demo_todo_list/common/widgets/textfield.dart';
 import 'package:demo_todo_list/util/models/todotasks.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,7 @@ late TextEditingController _descriptionTextController;
       //color: Colors.blue,
      
       child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           
           Row(
@@ -69,7 +71,9 @@ TTextfield(textController: _titleTextController, textTitle: "Title")
 ],
           ),
           TTextfield(textController: _descriptionTextController, textTitle: "Description",maxLines: 5,),
-RoutineDropdown(),
+RoutineDropdown(currentRoutine:  Todotasks.toDoTasks[widget.index][5].routineType,deadline:Todotasks.toDoTasks[widget.index][6].deadline ,timeOfDay: Todotasks.toDoTasks[widget.index][5].time,weekday:Todotasks.toDoTasks[widget.index][5].daysOfWeek ,dayofmonth:Todotasks.toDoTasks[widget.index][5].dayOfMonth ,),
+TaskCategory(),
+Spacer()
           
         ],
       )
