@@ -8,13 +8,22 @@ class RoutineDropdown extends StatefulWidget {
   final String? weekday;
   final DateTime? deadline;
   final int? dayofmonth;
+  final void Function({
+    required bool isRoutine,
+  required String routineType,
+  TimeOfDay? time,
+  int? dayOfMonth,
+  String? weekday,
+  DateTime? deadline,
+})? onChanged;
   const RoutineDropdown({super.key,
   required this.isRoutine,
   required this.currentRoutine,
   this.deadline,
   this.timeOfDay,
   this.weekday,
-  this.dayofmonth});
+  this.dayofmonth,
+  this.onChanged});
 
   @override
   State<RoutineDropdown> createState() => _RoutineDropdownState();
@@ -38,6 +47,19 @@ class _RoutineDropdownState extends State<RoutineDropdown> {
     dropDownValue=widget.currentRoutine;
     timeOfDay = widget.timeOfDay ?? TimeOfDay.now();
   }
+  void _notifyParent() {
+  final routineType = dropDownValue ?? "One Time";
+  final isRoutine = routineType != "One Time";
+  widget.onChanged?.call(
+    isRoutine: isRoutine,
+    routineType: routineType,
+    time: routineType == "Daily" ? timeOfDay : null,
+    dayOfMonth: routineType == "Monthly" ? monthPickedDay : null,
+    weekday: routineType == "Weekly" ? dayValue : null,
+    // deadline: routineType == "One Time" ? _deadline : null,
+  );
+}
+
   Future<void> _selectTime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
@@ -47,6 +69,7 @@ class _RoutineDropdownState extends State<RoutineDropdown> {
       setState(() {
         timeOfDay = picked;
       });
+      _notifyParent();
     }
   }
 
@@ -63,6 +86,7 @@ class _RoutineDropdownState extends State<RoutineDropdown> {
       setState(() {
         monthPickedDay = picked.day;
       });
+      _notifyParent();
     }
   }
 
@@ -80,6 +104,7 @@ class _RoutineDropdownState extends State<RoutineDropdown> {
             setState(() {
               dropDownValue = newValue!;
             });
+            _notifyParent();
           },
           items: const [
             DropdownMenuItem<String>(value: "One Time", child: Text("One Time")),
@@ -111,6 +136,7 @@ class _RoutineDropdownState extends State<RoutineDropdown> {
               setState(() {
                 dayValue = newValue!;
               });
+              _notifyParent();
             },
             items: weekdays
                 .map((day) => DropdownMenuItem<String>(

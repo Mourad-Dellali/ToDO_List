@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TaskCategory extends StatefulWidget {
-  final String? taskCategory;
+  final String taskCategory;
   const TaskCategory({super.key,
-  this.taskCategory});
+  this.taskCategory="Work"});
 
   @override
   State<TaskCategory> createState() => _TaskCategoryState();

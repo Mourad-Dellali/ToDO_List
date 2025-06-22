@@ -28,30 +28,35 @@ void showIconPicker(BuildContext context, Function(IconData) onIconSelected) {
     ),
   );
 }
-final bool? _isRoutine;
-final String? _currentRoutine;
-final TimeOfDay? _timeOfDay;
-final int? _dayofmonth;
-final Sring? _weekday;
+  bool _isRoutine = false;
+  String _currentRoutine = "One Time";
+  TimeOfDay? _timeOfDay;
+  int? _dayOfMonth;
+  String? _weekday;
+  DateTime? _deadline;
 
-void _createTask () {
-  Todotasks.toDoTasks.add(
-    [_titleTextController,
-    _descriptionTextController,
-    false,
-    _selectedIcon,
-    false,
-    IsRoutine(
-      isRoutine:  RoutineDropdown.isRoutine,
-      routineType: RoutineDropdown.currentRoutine,
-      time: RoutineDropDown.timeOfDay,
-      dayOfMonth: RoutineDropDown.dayofmonth,
-      daysOfWeek: RoutineDropDown.weekday,
+
+  void _createTask() {
+    Todotasks.toDoTasks.add([
+      _titleTextController.text,
+      _descriptionTextController.text,
+      false,
+      _selectedIcon,
+      false,
+      IsRoutine(
+        isRoutine: _isRoutine,
+        routineType: _currentRoutine,
+        time: _timeOfDay,
+        dayOfMonth: _dayOfMonth,
+        daysOfWeek: _weekday,
       ),
-      IsDeadline(deadline:  RoutineDropDown.deadline),
-      TaskCategory()]
-    );
-}
+      IsDeadline(deadline: _deadline),
+      TaskCategory(), // add state list later
+      
+    ]);
+    print(Todotasks.toDoTasks[4][5].routineType);
+    Navigator.of(context).pop(); 
+  }
 final _titleTextController= TextEditingController();
 final _descriptionTextController=TextEditingController();
   @override
@@ -88,7 +93,32 @@ TTextfield(textController: _titleTextController, textTitle: "Title")
 ],
           ),
           TTextfield(textController: _descriptionTextController, textTitle: "Description",maxLines: 5,),
-RoutineDropdown(currentRoutine: "One Time",),
+RoutineDropdown(
+            isRoutine: _isRoutine,
+            currentRoutine: _currentRoutine,
+            timeOfDay: _timeOfDay,
+            dayofmonth: _dayOfMonth,
+            weekday: _weekday,
+            deadline: _deadline,
+            
+            onChanged: ({
+              required bool isRoutine,
+              required String routineType,
+              TimeOfDay? time,
+              int? dayOfMonth,
+              String? weekday,
+              DateTime? deadline,
+            }) {
+              setState(() {
+                _isRoutine = isRoutine;
+                _currentRoutine = routineType;
+                _timeOfDay = time;
+                _dayOfMonth = dayOfMonth;
+                _weekday = weekday;
+                _deadline = deadline;
+              });
+            },
+          ),
 TaskCategory(),
 ElevatedButton(onPressed: _createTask, child: Text("Create Task")),
 Spacer()

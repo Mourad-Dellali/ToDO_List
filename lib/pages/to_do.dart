@@ -18,11 +18,12 @@ class ToDo extends StatefulWidget {
 class _ToDoState extends State<ToDo> {
   
 
-void createNewTask () {
-  showModalBottomSheet(context: context,
-  // isScrollControlled: true,
-  
-   builder:(context) => CreatenewtaskDialog(),);
+Future<void> createNewTask () async {
+  await showModalBottomSheet(
+    context: context,
+    builder: (context) => CreatenewtaskDialog(),
+  );
+  setState(() {});
 }
 void showTask(int index) {
   showModalBottomSheet(context: context,

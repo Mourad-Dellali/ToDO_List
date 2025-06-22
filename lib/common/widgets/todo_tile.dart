@@ -1,3 +1,4 @@
+import 'package:demo_todo_list/common/widgets/task_category.dart';
 import 'package:demo_todo_list/util/constants/available_icons.dart';
 import 'package:demo_todo_list/util/constants/sizes.dart';
 import 'package:demo_todo_list/util/models/is_deadline.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/material.dart';
 class TodoTile extends StatelessWidget {
 final String taskTitle;
 final String taskDesc;
-final String taskCategory;
+final TaskCategory taskCategory;
 final bool starred;
 final bool taskCompleted;
 final Icon? taskIcon;
@@ -19,7 +20,7 @@ final IsDeadline? deadline;
 final Function(bool,int) starChanged;
 final VoidCallback? onTap;
   const TodoTile({super.key,
-  this.taskCategory="Chore",
+  this.taskCategory=const TaskCategory(taskCategory: "Work"),
   required this.taskTitle,
   required this.routine,
   this.onTap,
@@ -93,7 +94,7 @@ InkWell(
           : const Text("")),
             ]
           ),
-          Text(taskCategory) 
+          Text(taskCategory.taskCategory) 
           
           
         ],
