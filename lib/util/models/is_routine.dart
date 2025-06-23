@@ -14,4 +14,19 @@ class IsRoutine {
     this.daysOfWeek,
     this.dayOfMonth,
   });
+  IsRoutine copyWith({
+    bool? isRoutine,
+    String? routineType,
+    TimeOfDay? time,
+    int? dayOfMonth,
+    String? daysOfWeek,
+  }) {
+    return IsRoutine(
+      isRoutine: isRoutine ?? this.isRoutine,
+      routineType: routineType ?? this.routineType,
+      time: time ?? this.time,
+      dayOfMonth: dayOfMonth ?? this.dayOfMonth,
+      daysOfWeek: daysOfWeek ?? this.daysOfWeek,
+    );
+  }
 }

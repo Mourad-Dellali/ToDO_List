@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 
 class TaskDeadline extends StatefulWidget {
   final DateTime? deadline;
+  final void Function({
+  DateTime? deadline,
+})? onChanged;
   const TaskDeadline({super.key,
-  this.deadline});
+  this.deadline,
+  this.onChanged});
 
   @override
   State<TaskDeadline> createState() => _TaskDeadlineState();
@@ -11,6 +15,7 @@ class TaskDeadline extends StatefulWidget {
 
 class _TaskDeadlineState extends State<TaskDeadline> {
   DateTime? _deadline;
+  
   Future<void> _pickDeadline(BuildContext context) async {
   final DateTime? picked = await showDatePicker(
     context: context,
@@ -22,8 +27,15 @@ class _TaskDeadlineState extends State<TaskDeadline> {
     setState(() {
       _deadline = picked;
     });
+    _notifyParent();
+    
   }
 }
+void _notifyParent() {
+    if (widget.onChanged != null) {
+      widget.onChanged!(deadline: _deadline);
+    }
+  }
 @override
   void initState() {
     super.initState();

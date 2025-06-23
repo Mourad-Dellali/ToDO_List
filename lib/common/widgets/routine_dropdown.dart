@@ -39,6 +39,7 @@ class _RoutineDropdownState extends State<RoutineDropdown> {
   late String dayValue;
   late int? monthPickedDay;
   TimeOfDay timeOfDay=TimeOfDay.now();
+  DateTime? _deadline;
 @override
   void initState() {
     super.initState();
@@ -46,6 +47,7 @@ class _RoutineDropdownState extends State<RoutineDropdown> {
     monthPickedDay = widget.dayofmonth ?? now.day;
     dropDownValue=widget.currentRoutine;
     timeOfDay = widget.timeOfDay ?? TimeOfDay.now();
+    _deadline = widget.deadline;
   }
   void _notifyParent() {
   final routineType = dropDownValue ?? "One Time";
@@ -56,7 +58,7 @@ class _RoutineDropdownState extends State<RoutineDropdown> {
     time: routineType == "Daily" ? timeOfDay : null,
     dayOfMonth: routineType == "Monthly" ? monthPickedDay : null,
     weekday: routineType == "Weekly" ? dayValue : null,
-    // deadline: routineType == "One Time" ? _deadline : null,
+    deadline: routineType == "One Time" ? _deadline : null,
   );
 }
 
@@ -127,7 +129,12 @@ class _RoutineDropdownState extends State<RoutineDropdown> {
             ],
           ),
           if (dropDownValue == "One Time")
-          TaskDeadline(deadline: widget.deadline,),
+          TaskDeadline(deadline: _deadline,onChanged: ({DateTime? deadline}) {
+      setState(() {
+        _deadline = deadline;
+      });
+      _notifyParent();
+    },),
         if (dropDownValue == "Weekly")
           DropdownButton<String>(
             value: dayValue,

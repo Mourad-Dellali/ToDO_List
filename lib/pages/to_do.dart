@@ -25,10 +25,14 @@ Future<void> createNewTask () async {
   );
   setState(() {});
 }
-void showTask(int index) {
-  showModalBottomSheet(context: context,
-  // isScrollControlled: true,
-   builder:(context) => ShowTaskModal(index: index,),);
+Future<void> showTask(int index) async {
+  final result = await showModalBottomSheet(
+    context: context,
+    builder: (context) => ShowTaskModal(index: index),
+  );
+  if (result == true) {
+    setState(() {}); // Rebuild the list
+  }
 }
 
   @override

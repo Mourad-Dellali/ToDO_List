@@ -1,7 +1,7 @@
 import 'package:demo_todo_list/common/widgets/task_category.dart';
 import 'package:demo_todo_list/util/constants/available_icons.dart';
 import 'package:demo_todo_list/util/constants/sizes.dart';
-import 'package:demo_todo_list/util/models/is_deadline.dart';
+
 import 'package:demo_todo_list/util/models/is_routine.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ final bool taskCompleted;
 final Icon? taskIcon;
 final int index;
 final IsRoutine routine;
-final IsDeadline? deadline;
+final DateTime? deadline;
 final Function(bool,int) starChanged;
 final VoidCallback? onTap;
   const TodoTile({super.key,
@@ -86,14 +86,26 @@ InkWell(
           Row(
             spacing: 10,
             children: [
-          routine.isRoutine ? Icon(Icons.repeat) : Icon(Icons.event),
-          routine.isRoutine
-      ? Text(routine.routineType ?? "")
-      : (deadline?.deadline != null
-          ? Text(deadline!.deadline.toString())
-          : const Text("")),
-            ]
-          ),
+          if (routine.isRoutine)
+          Text(" ${routine.routineType} :" ?? "")
+        else
+          (deadline != null
+              ? Text("${deadline!.year.toString().padLeft(4, '0')}-${deadline!.month.toString().padLeft(2, '0')}-${deadline!.day.toString().padLeft(2, '0')}")
+              : const Text("")),
+        if (routine.isRoutine && routine.routineType == "Daily" && routine.time != null) ...[
+          SizedBox(width: 8),
+          Text("at ${routine.time!.format(context)}"),
+        ],
+        if (routine.isRoutine && routine.routineType == "Weekly" && routine.daysOfWeek != null) ...[
+          SizedBox(width: 8),
+          Text("every ${routine.daysOfWeek}"),
+        ],
+        if (routine.isRoutine && routine.routineType == "Monthly" && routine.dayOfMonth != null) ...[
+          SizedBox(width: 8),
+          Text("every ${routine.dayOfMonth} of the month"),
+        ],
+      ],
+    ),
           Text(taskCategory.taskCategory) 
           
           

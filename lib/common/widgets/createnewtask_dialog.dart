@@ -2,7 +2,6 @@ import 'package:demo_todo_list/common/widgets/icon_selector.dart';
 import 'package:demo_todo_list/common/widgets/routine_dropdown.dart';
 import 'package:demo_todo_list/common/widgets/task_category.dart';
 import 'package:demo_todo_list/common/widgets/textfield.dart';
-import 'package:demo_todo_list/util/models/is_deadline.dart';
 import 'package:demo_todo_list/util/models/is_routine.dart';
 import 'package:demo_todo_list/util/models/todotasks.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +49,7 @@ void showIconPicker(BuildContext context, Function(IconData) onIconSelected) {
         dayOfMonth: _dayOfMonth,
         daysOfWeek: _weekday,
       ),
-      IsDeadline(deadline: _deadline),
+      _deadline,
       TaskCategory(), // add state list later
       
     ]);
