@@ -17,9 +17,9 @@ class Todotasks {
   }/*[
   0:title,
   1:desc,
-  2:completed,
+  2:starred,
   3:icon,
-  4:starred,
+  4:taskCompleted,
   5:isRoutine,
   6:Deadline type datetime,
   7:category
