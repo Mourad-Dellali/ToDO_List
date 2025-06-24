@@ -54,9 +54,8 @@ DateTime? _deadline;
 void _modifyTask() {
     Todotasks.toDoTasks[widget.index][0]=_titleTextController.text;
     Todotasks.toDoTasks[widget.index][1]=_descriptionTextController.text;
-    //Todotasks.toDoTasks[widget.index][2]=
+    //
     // Todotasks.toDoTasks[widget.index][3]
-    //Todotasks.toDoTasks[widget.index][4]
     Todotasks.toDoTasks[widget.index][5] = Todotasks.toDoTasks[widget.index][5].copyWith(
     isRoutine: _isRoutine,
     routineType: _routineType,
@@ -67,6 +66,11 @@ void _modifyTask() {
     
     //print(Todotasks.toDoTasks[4][5].routineType);
     Navigator.of(context).pop(true);
+  }
+  void _completeTask() {
+    Todotasks.toDoTasks[widget.index][2]=!Todotasks.toDoTasks[widget.index][2];
+    print (Todotasks.toDoTasks[widget.index][2]);
+    Navigator.of(context).pop();
   }
   @override
   Widget build(BuildContext context) {
@@ -129,7 +133,13 @@ onChanged: ({
     });
   },),
 TaskCategory(),
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceAround,
+  children: [
 ElevatedButton(onPressed: _modifyTask, child: Text("Save")),
+ElevatedButton(onPressed: _completeTask, child: Todotasks.toDoTasks[widget.index][2] ? Text("Mark As Completed"):Text("Mark As Uncompleted")),
+],),
+
 Spacer()
           
         ],
