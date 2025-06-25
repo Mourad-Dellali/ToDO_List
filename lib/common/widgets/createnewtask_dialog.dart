@@ -33,7 +33,7 @@ void showIconPicker(BuildContext context, Function(IconData) onIconSelected) {
   int? _dayOfMonth;
   String? _weekday;
   DateTime? _deadline;
-
+  String _taskCategory = "Work";
 
   void _createTask() {
     Todotasks.toDoTasks.add([
@@ -50,7 +50,7 @@ void showIconPicker(BuildContext context, Function(IconData) onIconSelected) {
         daysOfWeek: _weekday,
       ),
       _deadline,
-      TaskCategory(), // add state list later
+      TaskCategory(taskCategory: _taskCategory), // add state list later
       
     ]);
     print(Todotasks.toDoTasks[4][5].routineType);
@@ -60,6 +60,7 @@ final _titleTextController= TextEditingController();
 final _descriptionTextController=TextEditingController();
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       padding: EdgeInsets.all(4),
       //color: Colors.blue,
@@ -118,7 +119,14 @@ RoutineDropdown(
               });
             },
           ),
-TaskCategory(),
+ TaskCategory(
+  taskCategory: _taskCategory,
+  onChanged: (taskCategory) {
+    setState(() {
+      _taskCategory = taskCategory;
+    });
+  },
+),
 ElevatedButton(onPressed: _createTask, child: Text("Create Task")),
 Spacer()
           

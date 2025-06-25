@@ -54,7 +54,7 @@ DateTime? _deadline;
 void _modifyTask() {
     Todotasks.toDoTasks[widget.index][0]=_titleTextController.text;
     Todotasks.toDoTasks[widget.index][1]=_descriptionTextController.text;
-    // Todotasks.toDoTasks[widget.index][3]
+    Todotasks.toDoTasks[widget.index][3] = _selectedIcon;
     Todotasks.toDoTasks[widget.index][5] = Todotasks.toDoTasks[widget.index][5].copyWith(
     isRoutine: _isRoutine,
     routineType: _routineType,
@@ -73,7 +73,7 @@ void _modifyTask() {
   }
   @override
   Widget build(BuildContext context) {
-    
+   String _taskCategory="Work";
    return Container(
     
       padding: EdgeInsets.all(4),
@@ -131,7 +131,7 @@ onChanged: ({
       Todotasks.toDoTasks[widget.index][6] = _deadline;
     });
   },),
-TaskCategory(),
+TaskCategory(taskCategory: _taskCategory,),
 Row(
   mainAxisAlignment: MainAxisAlignment.spaceAround,
   children: [

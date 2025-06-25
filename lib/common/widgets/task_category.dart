@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 
-class TaskCategory extends StatefulWidget {
+class TaskCategory extends StatelessWidget {
   final String taskCategory;
-  const TaskCategory({super.key,
-  this.taskCategory="Work"});
-
-  @override
-  State<TaskCategory> createState() => _TaskCategoryState();
-}
-
-class _TaskCategoryState extends State<TaskCategory> {
+  final void Function(String taskCategory)? onChanged;
   static const List<String> taskCategories = [
     'Chore',
     'Work',
@@ -21,17 +14,16 @@ class _TaskCategoryState extends State<TaskCategory> {
     'Errands',
   ];
 
-  String? category; // Variable to store the selected category
-@override
-void initState() {
-  super.initState();
-  category=widget.taskCategory;
-}
+  const TaskCategory({
+    super.key,
+    required this.taskCategory,
+    this.onChanged,
+  });
+
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
-      value: category,
-      hint: const Text('Select Category'),
+      value: taskCategory,
       items: taskCategories.map(
         (cat) => DropdownMenuItem(
           value: cat,
@@ -39,9 +31,9 @@ void initState() {
         ),
       ).toList(),
       onChanged: (String? newValue) {
-        setState(() {
-          category = newValue!;
-        });
+        if (newValue != null && onChanged != null) {
+          onChanged!(newValue);
+        }
       },
     );
   }
